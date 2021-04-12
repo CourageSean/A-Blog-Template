@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    
+    <section id="main-section">
+
+
+        <nav >
+<ul>
+    <%- include("../partials/nav.ejs")%>
+    <li>Write Blog</li>
+</ul>
+        </nav>
+        <main>
+            
+            <a href="/fileupload">Add Blog</a>
+
+            <div class="top-blogs-container">
+  <div class="img-container-top-left">
+    <a href=<%=`/singleblog/${blogs[blogs.length-1].id}` %>>
+    <div >
+        <img src=<%=`/${blogs[blogs.length-1].url}`%> alt="">
+    </div> 
+</a>
+<h4> <%= blogs[blogs.length-1].title %>  </h4> 
+  </div>
+  <div>
+    <a href=<%=`/singleblog/${blogs[blogs.length-2].id}` %>>
+        <div class="img-container">
+            <img src=<%=`/${blogs[blogs.length-2].url}`%> alt="">
+        </div> 
+    </a>
+    <h4> <%= blogs[blogs.length-2].title %>  </h4> 
+</div>
+</div>
+            </div>
+        <div class="allblogs-container">
+            <% blogs.forEach(element => { %>
+                <div class="blog-container">
+                <a href=<%=`/singleblog/${element.id}` %>>
+                    
+                        <div class="img-container">
+                            <img src=<%=`/${element.url}`%> alt="">
+                        </div>
+                    </a>
+                        <h4> <%= element.title %>  </h4> 
+                       
+                   </div>
+                
+          
+            <% }) %>
+        </div>
+
+            </main>
+        <aside>
+         <form action="">
+             <input type="text" name="" id="" placeholder="SEARCH">
+         </form>
+        </aside>
+    </section>
+</body>
+</html>

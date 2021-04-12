@@ -25,7 +25,7 @@ app.use(express.json())
 //========= GET REQUESTS ==========
  app.get("/",(req,res) => {
     console.log(__dirname ) 
-   res.render("pages/index",{blogs})
+   res.render("pages/index-test",{blogs})
  })
 
  app.get("/add-blog",(req,res) => {
