@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include("../partials/nav.ejs")%>
+    <form action="/new" method="POST">
+    <label for="title">Blog title:</label>
+    <br>
+    <input type="text" id="title" name="title">
+    <br>
+    <label for="blogBody">Blog body</label>
+    <br>
+    <textarea name="blogBody" id="blogBody" cols="20" rows="10"></textarea>
+   <br>
+    <input type="submit" value="SEND">
+    </form>
+
+    <a href="/add-img">Add IMG</a>
+
+</body>
+</html>
