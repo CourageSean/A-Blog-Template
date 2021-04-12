@@ -8,7 +8,7 @@
 </head>
 <body>
     <%- include("../partials/nav.ejs")%>
- <img src="/background.png" alt="">
+ <img src=<%=`/${filteredBlog[0].url}`%> alt="">
   <h3><%= filteredBlog[0].title %>  </h3>
  <p> <%= filteredBlog[0].body %>  </p>
  <a href=<%=`/delete/${filteredBlog[0].id}`%>><button data-delete="<%=filteredBlog[0].id %> ">Delete Me</button></a>

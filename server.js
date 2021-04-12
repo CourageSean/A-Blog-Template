@@ -70,8 +70,15 @@ app.get("/delete/:id",(req,res) => {
 
 })
 
+
+
 //========= POST REQUESTS ==========
 let uuid = uuidv4()
+//======= Creating BLog allready because of id assignment ===========//
+
+let blog = 
+{   id: ""
+}
 
 
 app.post("/fileupload",(req,res,next) => {
@@ -91,20 +98,31 @@ form.parse(req);
 
 form.on('fileBegin', (name, file)=>{
     file.path = __dirname + '/public/' + file.name;
-    fs.rename(file.path,uuid.file.name.path.extname())
+    // fs.rename(file.path,uuid.file.name.path.extname())
+    console.log(file.path,"first ")
 });
 
 form.on('file', (name, file)=>{
     console.log('Uploaded ' + file.name);
-    fs.rename(file.name,uuid.file.name.path.extname())
+    fs.rename(file.path,__dirname + '/public/' +`${uuid}${path.extname(file.path)}`,(err) => {
+      console.log(file.name)
+       blog.url = `${uuid}${path.extname(file.path)}`
+       blog.id =`${uuid}`
+    })
+    console.log(path.extname(file.path),"second ")
 });
 
 
 
-return res.status(200).json({"result":"upload successful" })
+// return res.status(200).json({"result":"upload successful" })
+res.redirect("add-blog")
 
 
 })
+
+
+
+
 
    app.post("/new",
    
@@ -118,14 +136,14 @@ return res.status(200).json({"result":"upload successful" })
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let blog = [
-        {    
-            id: uuidv4(),
-            "url":"/img3.jpg",
-            title: req.body.title,
-            body: req.body.blogBody
-        }
-    ]
+    // let blog = [
+    //     {    
+    //         id: uuidv4(),
+    //         "url":`${uuid}`,
+    //         title: req.body.title,
+    //         body: req.body.blogBody
+    //     }
+    // ]
 
     // console.log(blog)
     if(!fs.existsSync("./data/blogs.json")){
@@ -137,15 +155,15 @@ return res.status(200).json({"result":"upload successful" })
         } )
     }else{
 
-        blog = 
-            {   id: uuidv4(),
-                title: req.body.title,
-                body: req.body.blogBody
-            }
+        blog.title =  req.body.title
+              
+                
+        blog.body = req.body.blogBody
+           
         
      let blogJson = JSON.parse(fs.readFileSync("./data/blogs.json","utf8")  )
      blogJson.push(blog)
-     console.log(blogJson)
+    //  console.log(blogJson)
      fs.writeFile("./data/blogs.json",JSON.stringify(blogJson),(err) => {
         if(err){throw err} 
         fs.readFile("./data/blogs.json","utf8",(err,files) => {
@@ -153,7 +171,7 @@ return res.status(200).json({"result":"upload successful" })
         })
        } )
     }
-     res.redirect("/fileupload")
+     res.redirect("/")
    })
 
  
